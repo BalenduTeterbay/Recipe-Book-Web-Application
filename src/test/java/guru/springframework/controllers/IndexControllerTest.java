@@ -38,7 +38,7 @@ public class IndexControllerTest {
     }
 
     @Test
-    public void techMockMVC() throws Exception{
+    public void testMockMVC() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         mockMvc.perform(get("/"))
@@ -47,14 +47,13 @@ public class IndexControllerTest {
     }
 
     @Test
-    public void getIndexPage() {
+    public void getIndexPage() throws Exception {
 
         //given
         Set<Recipe> recipes = new HashSet<>();
         recipes.add(new Recipe());
 
         Recipe recipe = new Recipe();
-
         recipe.setId(1L);
 
         recipes.add(recipe);
@@ -66,6 +65,7 @@ public class IndexControllerTest {
         //when
         String viewName = controller.getIndexPage(model);
 
+
         //then
         assertEquals("index", viewName);
         verify(recipeService, times(1)).getRecipes();
@@ -73,4 +73,5 @@ public class IndexControllerTest {
         Set<Recipe> setInController = argumentCaptor.getValue();
         assertEquals(2, setInController.size());
     }
+
 }
