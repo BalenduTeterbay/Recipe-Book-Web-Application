@@ -8,3 +8,10 @@ workflows:
   maven_test:
     jobs:
       - maven/test # checkout, build, test, and upload test results
+      build:
+        docker:
+          steps:
+            - run: mvn integration-test
+            - run:
+                name: Send to CodeCov
+                command: bash <(curl -s https://codecov.io/bash)
