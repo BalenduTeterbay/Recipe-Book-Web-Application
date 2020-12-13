@@ -8,8 +8,3 @@ workflows:
   maven_test:
     jobs:
       - maven/test # checkout, build, test, and upload test results
-
-      - run: mvn integration-test cobertura:cobertura
-
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
